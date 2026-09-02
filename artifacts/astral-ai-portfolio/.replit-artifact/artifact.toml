@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Astral AI Portfolio"
+description = "A premium, responsive personal portfolio for an AI/ML engineer and software developer, with an astronomical visual language, interactive project showcase, research timeline, and contact experience."
+version = "1.0.0"
+id = "artifacts/astral-ai-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21876
+
+[services.development]
+run = "pnpm --filter @workspace/astral-ai-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/astral-ai-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/astral-ai-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21876"
+BASE_PATH = "/"
