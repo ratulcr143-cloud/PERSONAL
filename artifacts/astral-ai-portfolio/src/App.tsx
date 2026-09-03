@@ -1,5 +1,5 @@
 import { type FormEvent, type ReactNode, useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, motion, useMotionValue, useScroll, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -30,7 +30,7 @@ type Project = {
   id: string;
   number: string;
   name: string;
-  category: 'ML Systems' | 'Research' | 'Product';
+  category: 'Real-Time Systems' | 'Research' | 'Product';
   description: string;
   longDescription: string;
   stack: string[];
@@ -44,61 +44,85 @@ const projects: Project[] = [
   {
     id: 'lumen',
     number: '01',
-    name: 'Lumen / anomaly intelligence',
-    category: 'ML Systems',
-    description: 'A streaming observability layer that catches the quiet failures before they become incident reports.',
-    longDescription: 'Lumen is a representation-learning system for high-cardinality telemetry. It learns the normal shape of a service rather than relying on brittle thresholds, then gives platform teams a traceable path from anomaly to probable cause.',
-    stack: ['Python', 'PyTorch', 'Kafka', 'Kubernetes'],
-    metric: '−38% false positives',
+    name: 'Distributed Real-Time Messaging',
+    category: 'Real-Time Systems',
+    description: 'A scalable real-time communication layer engineered for low-latency events, reliable delivery, and distributed systems.',
+    longDescription: 'A high-concurrency real-time messaging pipeline built for bi-directional state synchronization and low latency. Utilizes WebSockets via Socket.io over Node.js for instantaneous message propagation and active presence tracking. Employs MongoDB for schema persistence across private sessions, group channels, and historical replay without blocking the main event loop.',
+    stack: ['HTML', 'CSS', 'JAVASCRIPT', 'SOCKET.IO'],
+    metric: 'LIVE COMMUNICATION--ZERO DELAY',
     art: 'lumen',
-    github: 'https://github.com/',
-    live: 'https://example.com/',
+    github: 'https://github.com/ratulcr143-cloud',
+    live: 'https://github.com/ratulcr143-cloud',
   },
   {
     id: 'atlas',
     number: '02',
-    name: 'Atlas / geospatial foundation model',
+    name: 'Agri / Yield Intelligence',
     category: 'Research',
-    description: 'Multi-modal satellite intelligence for mapping climate risk at the scale of a continent.',
-    longDescription: 'Atlas aligns optical, radar, and temporal signals into a shared embedding space. The research prototype helps climate teams explore land-use change, with attention maps that keep the model accountable to the image.',
-    stack: ['JAX', 'ViT', 'Rasterio', 'GCP'],
-    metric: '4.1× faster inference',
+    description: 'Machine learning approaches for turning agricultural data into more reliable yield forecasts.',
+    longDescription: 'An AI-driven study of crop-yield forecasting, exploring machine learning models and agricultural data to improve prediction reliability and support data-informed farming decisions.',
+    stack: ['Pandas', 'Scikit-Learn', 'Jupyter', 'Python'],
+    metric: 'DATA • ML • FORECASTING',
     art: 'atlas',
     github: 'https://github.com/',
-    live: 'https://example.com/',
+    live: 'https://www.ijfmr.com/research-paper.php?id=21432',
   },
   {
     id: 'relay',
     number: '03',
-    name: 'Relay / human-in-the-loop NLP',
+    name: 'Crop Health Intelligence',
     category: 'Product',
-    description: 'A decision surface for support teams — grounded answers, clear confidence, no black-box handoff.',
+    description: 'An AI-powered agricultural intelligence platform that transforms crop data into actionable health insights, helping identify risks early and support smarter field-level decisions.',
     longDescription: 'Relay turns a messy knowledge base into a reviewable retrieval system. Agents can see the source passages, correct the response, and feed that correction back into evaluation without touching production prompts.',
-    stack: ['TypeScript', 'FastAPI', 'pgvector', 'React'],
-    metric: '2.6× resolution speed',
+    stack: ['React', 'Express', 'Typescript', 'Postgresql'],
+    metric: 'CROP HEALTH • AI INSIGHTS • EARLY RISK',
     art: 'relay',
     github: 'https://github.com/',
-    live: 'https://example.com/',
+    live: 'https://crop-health-intelligence--rishavcr26.replit.app/',
   },
 ];
 
 const research = [
-  { date: '2024 / ICLR workshop', title: 'Learning the shape of silence: self-supervised priors for sparse telemetry', note: 'A contrastive objective for finding meaningful absence in noisy operational data.', link: 'Read abstract' },
-  { date: '2023 / NeurIPS dataset track', title: 'TerraLens: a temporal benchmark for multi-sensor land change', note: 'A reproducible benchmark spanning 14 biomes, 6 sensor modalities, and 2.8M aligned tiles.', link: 'View paper' },
-  { date: '2022 / arXiv preprint', title: 'Calibrated retrieval for decisions under asymmetric cost', note: 'Why a useful confidence score should know when not to answer.', link: 'Read preprint' },
+  {
+    date: '2026 / Weather Intelligence',
+    title:
+      'A real-time weather intelligence platform that transforms forecast and environmental data into clear, actionable insights through an intuitive interface.',
+    note:
+      'Exploring how live environmental data can become clearer, faster, and more actionable.',
+    link: 'Read Abstract',
+    url: 'https://www.sciencedirect.com/science/article/pii/S277250222600020X',
+  },
+  {
+    date: '2023 / Machine Learning',
+    title:
+      'Spam News Detection',
+    note:
+      'A machine learning system designed to distinguish authentic news from spam using natural language processing and classification techniques.',
+    link: 'View Paper',
+    url: 'https://ieeexplore.ieee.org/abstract/document/10528318',
+  },
+  {
+    date: '2025 / Productivity',
+    title:
+      'Smart Task Manager',
+    note:
+      'A smart productivity platform designed to organize tasks, streamline priorities, and turn everyday planning into a more focused workflow.',
+    link: 'Explore the Build',
+    url: 'https://github.com/ratulcr143-cloud/SMART-TASK-MANAGER',
+  },
 ];
 
 const skills = [
-  { name: 'Machine learning', items: 'PyTorch · JAX · scikit-learn · XGBoost' },
-  { name: 'Systems & data', items: 'Python · SQL · Kafka · Spark · Postgres' },
-  { name: 'Product engineering', items: 'TypeScript · React · FastAPI · GraphQL' },
-  { name: 'Infrastructure', items: 'AWS · GCP · Docker · Kubernetes · Terraform' },
+  { name: 'AI & Machine learning', items: 'PyTorch · Data Analysis · Scikit-Learn · NLP' },
+  { name: 'Programming', items: 'JAVA · C · PYTHON · TYPESCRIPT · JAVASCRIPT' },
+  { name: 'Application Development', items: 'REACT · ANDROID · NODEE.JS · REST APIs · EXPRESS' },
+  { name: 'Data and Tools', items: 'MYSQL · POSTGRESQL · DOCKER · GIT · VS CODE' },
 ];
 
 const experience = [
-  { year: '2024 — now', role: 'Staff Machine Learning Engineer', company: 'Northstar Systems', text: 'Leading a small applied research group building reliable intelligence for developer infrastructure. Shipped the anomaly foundation behind three product lines.' },
-  { year: '2021 — 2024', role: 'Senior Software Engineer, ML', company: 'Morrow Labs', text: 'Owned the path from research notebook to monitored service: multimodal retrieval, evaluation tooling, and the platform that made both repeatable.' },
-  { year: '2018 — 2021', role: 'Data & Software Engineer', company: 'Orbital Research Collective', text: 'Built geospatial pipelines for earth-observation researchers and discovered a lasting fascination with the systems between a signal and a decision.' },
+  { year: '2025 — now', role: 'MCA (AI&DL) IBM COLLABORATION', company: 'Assam Downtown University', text: 'Bridging advanced computing with real-world innovation through an industry-integrated journey across AI, software engineering, and emerging technologies.' },
+  { year: '2023 — 2024', role: 'AI&ML Intern', company: 'Kareng Technologies', text: 'Gained hands-on experience developing machine learning and AI solutions using Python, with practical exposure to data analysis, model training, and AI application development.' },
+  { year: '2024 — now', role: 'Independent Projects and Research', company: 'AI • Software • Applied Research', text: 'Building and experimenting with practical systems across weather intelligence, NLP-based spam detection, smart productivity, and agricultural intelligence.' },
 ];
 
 const navItems = [
@@ -106,6 +130,7 @@ const navItems = [
   { href: '#work', label: 'Selected work' },
   { href: '#research', label: 'Research' },
   { href: '#contact', label: 'Contact' },
+  { href: '/resume.pdf', label: 'Profile.exe'}
 ];
 
 function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
@@ -141,21 +166,37 @@ function Stars() {
 
 function Header({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
   const [open, setOpen] = useState(false);
+  const { scrollY } = useScroll();
+  const navOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const navY = useTransform(scrollY, [0, 400], [0, -20]);
   const close = () => setOpen(false);
   return (
-    <header className="site-header" data-testid="site-header">
+    <motion.header
+  className="site-header w-full fixed top-0 left-0 z-50"
+  style={{ opacity: navOpacity, y: navY, left: "50%", x: "-50%" }}
+  data-testid="site-header"
+>
       <div className="flex h-[58px] items-center justify-between px-4 sm:px-6">
         <a href="#top" className="brand-mark" onClick={close} data-testid="link-home">
-          <span className="brand-orbit" aria-hidden="true"><i /></span>
-          <span className="brand-word">astral<em>.ai</em></span>
+          <motion.span
+  className="brand-orbit"
+  aria-hidden="true"
+  animate={{ rotate: 360 }}
+  transition={{
+    duration: 12,
+    repeat: Infinity,
+    ease: "linear",
+  }}
+>
+  <i />
+</motion.span>
+          <span className="brand-word">ray//<em>.systems!</em></span>
         </a>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
           {navItems.map((item) => <a key={item.href} href={item.href} className="nav-link" data-testid={`link-nav-${item.label.toLowerCase().replaceAll(' ', '-')}`}>{item.label}</a>)}
         </nav>
         <div className="flex items-center gap-2">
-          <button type="button" className="grid h-8 w-8 place-items-center border border-transparent text-[var(--gold)] transition hover:border-[var(--line)]" onClick={onToggle} aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'} data-testid="button-theme-toggle">
-            {dark ? <Sun size={15} strokeWidth={1.6} /> : <Moon size={15} strokeWidth={1.6} />}
-          </button>
+          
           <a href="#contact" className="primary-btn hidden !px-3 !py-2.5 sm:inline-flex" data-testid="link-header-contact">Let's talk <ArrowUpRight size={13} /></a>
           <button type="button" className="grid h-8 w-8 place-items-center md:hidden" onClick={() => setOpen(!open)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} data-testid="button-mobile-menu">
             {open ? <X size={18} /> : <Menu size={18} />}
@@ -169,7 +210,7 @@ function Header({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
           </motion.nav>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }
 
@@ -193,7 +234,7 @@ function Hero() {
   const [reduced, setReduced] = useState(false);
   const words = ['useful.', 'explainable.', 'alive.'];
   const [wordIndex, setWordIndex] = useState(0);
-  const roleText = 'AI/ML Engineer | Software Developer | Innovator';
+  const roleText = 'AI/DL | Software Developer | Information Security';
   const [typedRole, setTypedRole] = useState('');
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -212,7 +253,7 @@ function Hero() {
         setTyped(target.slice(0, current));
         if (current === 0) { deleting = false; setWordIndex((value) => value + 1); }
       }
-    }, 125);
+    }, 200);
     return () => window.clearInterval(tick);
   }, [wordIndex]);
   useEffect(() => {
@@ -227,8 +268,10 @@ function Hero() {
         current += 1;
         setTypedRole(roleText.slice(0, current));
         if (current === roleText.length) {
-          deleting = true;
-        }
+  window.setTimeout(() => {
+    deleting = true;
+  }, 500);
+}
       } else {
         current -= 1;
         setTypedRole(roleText.slice(0, current));
@@ -236,7 +279,7 @@ function Hero() {
           deleting = false;
         }
       }
-    }, 80);
+    }, 120);
     return () => window.clearInterval(tick);
   }, [reduced]);
 
@@ -245,12 +288,28 @@ function Hero() {
       <div className="hero-grid absolute inset-0 -z-10" /><Stars />
       <div className="mx-auto grid w-full max-w-[1180px] items-center gap-12 px-5 pb-28 sm:px-8 lg:grid-cols-[1.02fr_.98fr] lg:gap-6 lg:pb-36">
         <div className="relative z-[1]">
-          <Reveal><div className="eyebrow">Astronomer / engineer / builder</div></Reveal>
+          <Reveal><div className="eyebrow">Developer / Researcher / Innovator</div></Reveal>
           <Reveal delay={.04}><div className="role-terminal mt-5" aria-label={roleText}><span className="role-terminal-label">ROLE /</span><span>{typedRole}</span><span className="role-terminal-caret" aria-hidden="true" /></div></Reveal>
-          <Reveal delay={.08}><h1 id="hero-heading" className="display-title mt-7 max-w-[720px] text-[clamp(3.7rem,9vw,7.9rem)]">I build intelligence that stays <span className="serif-accent gold-text">{reduced ? 'useful.' : typed}<span className="ml-1 inline-block h-[.72em] w-[2px] translate-y-[.04em] bg-[var(--gold)]" aria-hidden="true" /></span></h1></Reveal>
-          <Reveal delay={.16}><p className="mt-8 max-w-[525px] text-[15px] leading-7 muted-text">I’m <strong className="font-medium text-foreground">Mara Voss</strong> — an AI/ML engineer and software developer turning deep-space curiosity into machine intelligence teams can trust, ship, and understand.</p></Reveal>
+          <Reveal delay={.08}>
+            <h1 id="hero-heading" className="display-title mt-7 max-w-[720px] text-[clamp(3.7rem,9vw,7.9rem)]">I build intelligence that stays <span className="whitespace-nowrap gold-text">
+  {reduced ? 'useful.' : typed}
+  <span className="ml-1 inline-block h-[.72em] w-[2px] translate-y-[-.04em] bg-[var(--gold)]" aria-hidden="true" />
+</span>
+</h1>
+</Reveal>
+          <Reveal delay={.16}><p className="mt-8 max-w-[525px] text-[15px] leading-7 muted-text">I’m <strong className="font-medium text-foreground">Ratul Ray</strong> — an AI/DL engineer and software developer building intelligent, secure and impactful digital solutions through research, engineering and real-world projects.</p></Reveal>
           <Reveal delay={.24}><div className="mt-9 flex flex-wrap gap-3"><a className="primary-btn" href="#work" data-testid="link-hero-work">Explore the work <ArrowDownRight size={14} /></a><a className="secondary-btn" href="#contact" data-testid="link-hero-contact">Start a conversation <ArrowUpRight size={14} /></a></div></Reveal>
-          <Reveal delay={.32}><div className="mt-14 flex max-w-[520px] items-center gap-5 border-t border-[var(--line)] pt-5"><div className="flex -space-x-2" aria-label="Teams Mara has worked with"><span className="grid h-7 w-7 place-items-center rounded-full border border-[#1d2341] bg-[#27315d] text-[9px] text-[#b9c5ff]">NS</span><span className="grid h-7 w-7 place-items-center rounded-full border border-[#1d2341] bg-[#244754] text-[9px] text-[#99edf1]">ML</span><span className="grid h-7 w-7 place-items-center rounded-full border border-[#1d2341] bg-[#513759] text-[9px] text-[#f1c878]">OR</span></div><span className="section-kicker">Trusted across research labs<br />and product teams</span></div></Reveal>
+          <Reveal delay={.32}><div className="mt-14 flex max-w-[520px] items-center gap-5 border-t border-[var(--line)] pt-5"><div className="skill-orbs" aria-label="Core capabilities">
+  <div className="skill-orb skill-orb-ai">
+    <span>AI</span>
+  </div>
+  <div className="skill-orb skill-orb-ml">
+    <span>ML</span>
+  </div>
+  <div className="skill-orb skill-orb-sec">
+    <span>SEC</span>
+  </div>
+</div><span className="section-kicker">BUILDING SYSTEM THAT THINKS<br />AND SOFTWARE THAT MATTERS!</span></div></Reveal>
         </div>
         <Reveal delay={.2} className="relative flex justify-center lg:justify-end"><OrbitalVisualization /></Reveal>
       </div>
@@ -266,8 +325,8 @@ function About() {
         <Reveal><div><div className="eyebrow">01 / Coordinates</div><h2 id="about-heading" className="display-title mt-6 max-w-[340px] text-5xl sm:text-6xl">Curious by nature. <span className="serif-accent cyan-text">rigorous</span> by trade.</h2></div></Reveal>
         <div>
           <Reveal><p className="max-w-[670px] text-[21px] leading-[1.45] tracking-[-.03em] text-foreground sm:text-[26px]">The best systems feel a little like a good observatory: quiet at the surface, extraordinarily precise underneath, and always helping you see farther.</p></Reveal>
-          <Reveal delay={.1}><p className="mt-6 max-w-[630px] text-[14px] leading-7 muted-text">My work lives between applied research and product engineering. I care about models that survive contact with reality — imperfect data, changing incentives, latency budgets, and the human who has to make the final call. Before ML, I built tools for earth-observation scientists. That perspective still shapes everything: start with the signal, name the uncertainty, and make the next action obvious.</p></Reveal>
-          <Reveal delay={.16}><div className="mt-12 grid max-w-[680px] grid-cols-2 gap-8 sm:grid-cols-4"><div className="metric"><span className="metric-value">8+</span><span className="metric-label">Years shipping</span></div><div className="metric"><span className="metric-value">19</span><span className="metric-label">Systems in orbit</span></div><div className="metric"><span className="metric-value">3</span><span className="metric-label">Research tracks</span></div><div className="metric"><span className="metric-value">∞</span><span className="metric-label">Questions left</span></div></div></Reveal>
+          <Reveal delay={.1}><p className="mt-6 max-w-[630px] text-[14px] leading-7 muted-text">A notebook prototype is only the beginning. Specializing in AI and Deep Learning, I take models from initial mathematical formulation to operational deployment—combining modern full-stack architectures, real-time WebSockets, and optimized inference engines. From agricultural predictive intelligence to rapid-response incident systems, I build software that translates raw telemetry into immediate, actionable insight.</p></Reveal>
+          <Reveal delay={.16}><div className="mt-12 grid max-w-[680px] grid-cols-2 gap-8 sm:grid-cols-4"><div className="metric"><span className="metric-value">05+</span><span className="metric-label">YEARS OF EXPERIENCE</span></div><div className="metric"><span className="metric-value">07+</span><span className="metric-label">End-to-end builds</span></div><div className="metric"><span className="metric-value">03</span><span className="metric-label">Research tracks</span></div><div className="metric"><span className="metric-value">∞</span><span className="metric-label">Edge cases to solve</span></div></div></Reveal>
         </div>
       </div>
     </section>
@@ -308,7 +367,7 @@ function Work() {
     <section id="work" className="scroll-mt-24 border-y border-[var(--line)] bg-[rgba(10,12,28,.28)] py-24 sm:py-32" aria-labelledby="work-heading">
       <div className="mx-auto w-full max-w-[1180px] px-5 sm:px-8">
         <Reveal><div className="flex flex-col justify-between gap-7 sm:flex-row sm:items-end"><div><div className="eyebrow">02 / Field notes</div><h2 id="work-heading" className="display-title mt-5 text-5xl sm:text-7xl">Selected <span className="serif-accent gold-text">work</span></h2></div><p className="max-w-[270px] text-[13px] leading-6 muted-text">A few systems I’ve taken from first signal to a place where real people rely on them.</p></div></Reveal>
-        <Reveal delay={.08}><div className="mt-12 flex flex-wrap gap-2" role="group" aria-label="Filter projects">{(['All', 'ML Systems', 'Research', 'Product'] as const).map((item) => <button type="button" className={`filter-btn ${filter === item ? 'active' : ''}`} onClick={() => setFilter(item)} key={item} data-testid={`button-filter-${item.toLowerCase().replaceAll(' ', '-')}`}>{item}</button>)}</div></Reveal>
+        <Reveal delay={.08}><div className="mt-12 flex flex-wrap gap-2" role="group" aria-label="Filter projects">{(['All', 'Real-Time Systems', 'Research', 'Product'] as const).map((item) => <button type="button" className={`filter-btn ${filter === item ? 'active' : ''}`} onClick={() => setFilter(item)} key={item} data-testid={`button-filter-${item.toLowerCase().replaceAll(' ', '-')}`}>{item}</button>)}</div></Reveal>
         <motion.div layout className="mt-6 grid gap-5 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {visible.map((project, index) => <motion.article layout key={project.id} className="project-card" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 15 }} transition={{ delay: index * .06 }} data-testid={`card-project-${project.id}`}><button type="button" className="block w-full text-left" onClick={() => setSelected(project)} aria-label={`View details for ${project.name}`} data-testid={`button-project-${project.id}`}><ProjectArt kind={project.art} /><div className="project-content"><div className="flex items-center justify-between"><span className="section-kicker">{project.number} / {project.category}</span><CircleArrowOutUpRight size={16} className="text-[var(--gold)]" /></div><h3 className="mt-4 font-display text-[22px] font-medium tracking-[-.05em] text-foreground">{project.name}</h3><p className="mt-3 text-[13px] leading-6 muted-text">{project.description}</p><div className="mt-6 flex items-center justify-between border-t border-[var(--line)] pt-4"><span className="font-mono text-[10px] text-[var(--cyan)]">{project.metric}</span><span className="font-mono text-[10px] text-muted-foreground">Inspect case →</span></div></div></button></motion.article>)}
@@ -322,10 +381,73 @@ function Work() {
 
 function Research() {
   return (
-    <section id="research" className="mx-auto w-full max-w-[1180px] scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32" aria-labelledby="research-heading">
+    <section
+      id="research"
+      className="mx-auto w-full max-w-[1180px] scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32"
+      aria-labelledby="research-heading"
+    >
       <div className="grid gap-14 lg:grid-cols-[.7fr_1.3fr] lg:gap-24">
-        <Reveal><div><div className="eyebrow">03 / The archive</div><h2 id="research-heading" className="display-title mt-5 text-5xl sm:text-6xl">Research for the <span className="serif-accent cyan-text">unknown</span>.</h2><p className="mt-7 max-w-[290px] text-[13px] leading-6 muted-text">I publish the useful parts: what changed my mind, what failed loudly, and what the data kept trying to tell us.</p><a className="secondary-btn mt-8" href="https://arxiv.org/" target="_blank" rel="noreferrer" data-testid="link-research-archive">Open publication archive <ExternalLink size={13} /></a></div></Reveal>
-        <div>{research.map((item, index) => <Reveal key={item.title} delay={index * .08}><article className="research-card grid gap-4 sm:grid-cols-[145px_1fr_auto] sm:items-start" data-testid={`card-research-${index}`}><div className="research-index">{item.date}</div><div><h3 className="max-w-[510px] font-display text-[19px] leading-snug tracking-[-.04em] text-foreground">{item.title}</h3><p className="mt-2 max-w-[480px] text-[12px] leading-5 muted-text">{item.note}</p></div><a className="inline-flex items-center gap-2 self-start text-[10px] uppercase tracking-[.12em] text-[var(--gold)] no-underline hover:text-[var(--cyan)]" href="https://arxiv.org/" target="_blank" rel="noreferrer" data-testid={`link-research-${index}`}>{item.link} <ArrowUpRight size={13} /></a></article></Reveal>)}</div>
+        <Reveal>
+          <div>
+            <h2
+              id="research-heading"
+              className="display-title mt-5 text-5xl sm:text-6xl"
+            >
+              Research for the{' '}
+              <span className="serif-accent cyan-text">unknown</span>.
+            </h2>
+
+            <p className="mt-7 max-w-[290px] text-[13px] leading-6 muted-text">
+              I publish the useful parts: what changed my mind, what failed
+              loudly, and what the data kept trying to tell us.
+            </p>
+
+            <a
+              className="secondary-btn mt-8"
+              href="https://example.com"
+              target="_blank"
+              rel="noreferrer"
+              data-testid="link-research-archive"
+            >
+              Open project archive
+              <ExternalLink size={13} />
+            </a>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-4">
+          {research.map((item, index) => (
+            <Reveal key={item.title} delay={index * 0.08}>
+              <article
+                className="research-card grid gap-4 sm:grid-cols-[145px_1fr_auto] sm:gap-5"
+                data-testid={`card-research-${index}`}
+              >
+                <div className="research-index">{item.date}</div>
+
+                <div>
+                  <h3 className="max-w-[510px] font-display text-[19px] leading-snug tracking-[-.04em] text-foreground">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-2 max-w-[480px] text-[12px] leading-5 muted-text">
+                    {item.note}
+                  </p>
+                </div>
+
+                <a
+                  className="inline-flex items-center gap-2 self-start text-[10px] uppercase tracking-[.12em] text-[var(--gold)] no-underline hover:text-[var(--cyan)]"
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-testid={`link-research-${index}`}
+                >
+                  {item.link}
+                  <ArrowUpRight size={13} />
+                </a>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -369,7 +491,7 @@ function Contact() {
   return (
     <section id="contact" className="scroll-mt-24 border-t border-[var(--line)] py-24 sm:py-32" aria-labelledby="contact-heading">
       <div className="mx-auto grid w-full max-w-[1180px] gap-14 px-5 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-24">
-        <Reveal><div><div className="eyebrow">05 / Open channel</div><h2 id="contact-heading" className="display-title mt-5 max-w-[470px] text-5xl sm:text-7xl">Have a hard problem? <span className="serif-accent cyan-text">Good.</span></h2><p className="mt-7 max-w-[390px] text-[14px] leading-7 muted-text">I’m interested in ambitious systems, kind teams, and questions that don’t have a tidy answer yet. Tell me what you’re exploring.</p><div className="mt-10 flex flex-col gap-4"><a className="inline-flex w-fit items-center gap-3 font-mono text-[11px] text-foreground no-underline hover:text-[var(--cyan)]" href="mailto:hello@astral.ai" data-testid="link-email"><Mail size={15} className="text-[var(--gold)]" /> hello@astral.ai</a><a className="inline-flex w-fit items-center gap-3 font-mono text-[11px] text-foreground no-underline hover:text-[var(--cyan)]" href="https://www.linkedin.com/" target="_blank" rel="noreferrer" data-testid="link-linkedin"><Linkedin size={15} className="text-[var(--gold)]" /> linkedin / mara-voss</a></div></div></Reveal>
+        <Reveal><div><div className="eyebrow">05 / Open channel</div><h2 id="contact-heading" className="display-title mt-5 max-w-[470px] text-5xl sm:text-7xl">Have a hard problem? <span className="serif-accent cyan-text">Good.</span></h2><p className="mt-7 max-w-[390px] text-[14px] leading-7 muted-text">I’m interested in ambitious systems, kind teams, and questions that don’t have a tidy answer yet. Tell me what you’re exploring.</p><div className="mt-10 flex flex-col gap-4"><a className="inline-flex w-fit items-center gap-3 font-mono text-[11px] text-foreground no-underline hover:text-[var(--cyan)]" href="mailto:crrishav06@rediffmail.com" data-testid="link-email"><Mail size={15} className="text-[var(--gold)]" /> crrishav06@rediffmail.com</a><a className="inline-flex w-fit items-center gap-3 font-mono text-[11px] text-foreground no-underline hover:text-[var(--cyan)]" href="https://www.linkedin.com/in/ratul-cr-2605b1227/?skipRedirect=true" target="_blank" rel="noreferrer" data-testid="link-linkedin"><Linkedin size={15} className="text-[var(--gold)]" /> linkedin / Ratul Ray</a></div></div></Reveal>
         <Reveal delay={.12}><div className="glass-panel p-6 sm:p-8">{submitted ? <div className="flex min-h-[370px] flex-col justify-center"><div className="grid h-12 w-12 place-items-center rounded-full border border-[var(--cyan)] text-[var(--cyan)]"><Check size={21} /></div><h3 className="display-title mt-7 text-4xl">Transmission received.</h3><p className="mt-4 max-w-[390px] text-[13px] leading-6 muted-text">Thanks, {form.name.split(' ')[0] || 'friend'}. I’ll get back to you at {form.email} within a few orbits.</p><button type="button" className="secondary-btn mt-8 w-fit" onClick={() => { setSubmitted(false); setForm({ name: '', email: '', message: '' }); }} data-testid="button-send-another">Send another signal <Send size={13} /></button></div> : <form onSubmit={submit} noValidate><div className="mb-7 flex items-center justify-between"><div><div className="font-display text-lg text-foreground">Start a transmission</div><div className="mt-1 font-mono text-[10px] muted-text">Typically replies in 2–3 days</div></div><Radar size={21} className="text-[var(--gold)]" /></div><div className="grid gap-5 sm:grid-cols-2"><label className="grid gap-2 text-[10px] uppercase tracking-[.12em] muted-text">Name<input className="input-field mt-1 text-[13px] normal-case tracking-normal" value={form.name} onChange={(event) => update('name', event.target.value)} placeholder="Your name" aria-invalid={Boolean(errors.name)} data-testid="input-contact-name" />{errors.name && <span className="normal-case tracking-normal text-[11px] text-[hsl(var(--destructive))]">{errors.name}</span>}</label><label className="grid gap-2 text-[10px] uppercase tracking-[.12em] muted-text">Email<input className="input-field mt-1 text-[13px] normal-case tracking-normal" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder="you@company.com" type="email" aria-invalid={Boolean(errors.email)} data-testid="input-contact-email" />{errors.email && <span className="normal-case tracking-normal text-[11px] text-[hsl(var(--destructive))]">{errors.email}</span>}</label></div><label className="mt-5 grid gap-2 text-[10px] uppercase tracking-[.12em] muted-text">What are you working on?<textarea className="input-field mt-1 min-h-[145px] resize-y text-[13px] normal-case tracking-normal" value={form.message} onChange={(event) => update('message', event.target.value)} placeholder="A model, a product, a strange signal..." aria-invalid={Boolean(errors.message)} data-testid="input-contact-message" />{errors.message && <span className="normal-case tracking-normal text-[11px] text-[hsl(var(--destructive))]">{errors.message}</span>}</label><div className="mt-6 flex items-center justify-between gap-4"><span className="hidden items-center gap-2 font-mono text-[10px] muted-text sm:inline-flex"><span className="h-1.5 w-1.5 rounded-full bg-[var(--cyan)]" /> No mailing list. Just humans.</span><button className="primary-btn ml-auto" type="submit" data-testid="button-submit-contact">Send message <Send size={13} /></button></div></form>}</div></Reveal>
       </div>
     </section>
@@ -379,7 +501,7 @@ function Contact() {
 function Footer() {
   return (
     <footer className="border-t border-[var(--line)] py-7">
-      <div className="mx-auto flex w-full max-w-[1180px] flex-col items-start justify-between gap-5 px-5 sm:px-8 md:flex-row md:items-center"><div className="flex items-center gap-3"><span className="brand-orbit" aria-hidden="true"><i /></span><span className="font-mono text-[10px] muted-text">© 2025 Mara Voss / All signals reserved.</span></div><div className="flex items-center gap-5"><a href="https://github.com/" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="GitHub" data-testid="link-footer-github"><Github size={15} /></a><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="LinkedIn" data-testid="link-footer-linkedin"><Linkedin size={15} /></a><a href="#top" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.14em] text-[var(--gold)] no-underline" data-testid="link-back-to-top">Back to top <ArrowUpRight size={13} /></a></div></div>
+      <div className="mx-auto flex w-full max-w-[1180px] flex-col items-start justify-between gap-5 px-5 sm:px-8 md:flex-row md:items-center"><div className="flex items-center gap-3"><span className="brand-orbit" aria-hidden="true"><i /></span><span className="font-mono text-[10px] muted-text">© 2026 Ratul CR / All signals reserved.</span></div><div className="flex items-center gap-5"><a href="https://github.com/ratulcr143-cloud" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="GitHub" data-testid="link-footer-github"><Github size={15} /></a><a href="https://www.linkedin.com/in/ratul-cr-2605b1227/?skipRedirect=true" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="LinkedIn" data-testid="link-footer-linkedin"><Linkedin size={15} /></a><a href="#top" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.14em] text-[var(--gold)] no-underline" data-testid="link-back-to-top">Back to top <ArrowUpRight size={13} /></a></div></div>
     </footer>
   );
 }
@@ -446,6 +568,11 @@ function RoutedErrorBoundary({ children }: { children: ReactNode }) {
 }
 
 function App() {
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
