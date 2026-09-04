@@ -153,7 +153,15 @@ html.light {
 }
 
 .brand-mark { display: inline-flex; align-items: center; gap: 10px; color: hsl(var(--foreground)); text-decoration: none; }
-.brand-orbit { width: 25px; height: 25px; position: relative; display: grid; place-items: center; }
+.brand-orbit {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  animation: orbit-spin 3s linear infinite;
+  transform-origin: center;
+}
 .brand-orbit::before, .brand-orbit::after { content: ''; position: absolute; inset: 4px -2px; border: 1px solid var(--cyan); border-radius: 50%; transform: rotate(53deg); opacity: .8; }
 .brand-orbit::after { inset: 1px 3px; transform: rotate(-53deg); border-color: var(--gold); opacity: .65; }
 .brand-orbit i { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); }
@@ -235,7 +243,7 @@ html.light .project-card { background: linear-gradient(145deg, rgba(255,255,255,
 .project-art { position: relative; height: 230px; overflow: hidden; background: #10152c; }
 html.light .project-art { background: #dce6f4; }
 .project-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(6,8,20,.72)); }
-.project-art img { width: 100%; height: 100%; object-fit: cover; opacity: .8; transition: transform .5s ease; }
+.project-art img { width: 100%; height: 100%; object-fit: contain; opacity: .8; transition: transform .5s ease; }
 .project-card:hover .project-art img { transform: scale(1.05); }
 .project-content { position: relative; z-index: 1; padding: 21px; }
 .tag { display: inline-flex; border: 1px solid rgba(86, 229, 242, .3); padding: 5px 8px; color: var(--cyan); font: 400 9px var(--app-font-mono); letter-spacing: .08em; text-transform: uppercase; }
@@ -430,4 +438,34 @@ html.light .input-field { background: rgba(255,255,255,.68); }
   box-shadow:
     0 0 35px rgba(255,255,255,.18),
     inset 0 0 22px rgba(255,255,255,.12);
+}
+.modal-panel > .project-art {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.modal-panel > .project-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.footer-orbit {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  animation: orbit-spin 3s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

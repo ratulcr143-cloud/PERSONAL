@@ -50,7 +50,7 @@ const projects: Project[] = [
     longDescription: 'A high-concurrency real-time messaging pipeline built for bi-directional state synchronization and low latency. Utilizes WebSockets via Socket.io over Node.js for instantaneous message propagation and active presence tracking. Employs MongoDB for schema persistence across private sessions, group channels, and historical replay without blocking the main event loop.',
     stack: ['HTML', 'CSS', 'JAVASCRIPT', 'SOCKET.IO'],
     metric: 'LIVE COMMUNICATION--ZERO DELAY',
-    art: 'lumen',
+    art: '/images/image1.jpeg',
     github: 'https://github.com/ratulcr143-cloud',
     live: 'https://github.com/ratulcr143-cloud',
   },
@@ -63,7 +63,7 @@ const projects: Project[] = [
     longDescription: 'An AI-driven study of crop-yield forecasting, exploring machine learning models and agricultural data to improve prediction reliability and support data-informed farming decisions.',
     stack: ['Pandas', 'Scikit-Learn', 'Jupyter', 'Python'],
     metric: 'DATA • ML • FORECASTING',
-    art: 'atlas',
+    art: '/images/image2.jpeg',
     github: 'https://github.com/',
     live: 'https://www.ijfmr.com/research-paper.php?id=21432',
   },
@@ -76,7 +76,7 @@ const projects: Project[] = [
     longDescription: 'Relay turns a messy knowledge base into a reviewable retrieval system. Agents can see the source passages, correct the response, and feed that correction back into evaluation without touching production prompts.',
     stack: ['React', 'Express', 'Typescript', 'Postgresql'],
     metric: 'CROP HEALTH • AI INSIGHTS • EARLY RISK',
-    art: 'relay',
+    art: '/images/image3.jpeg',
     github: 'https://github.com/',
     live: 'https://crop-health-intelligence--rishavcr26.replit.app/',
   },
@@ -121,6 +121,9 @@ const skills = [
 
 const experience = [
   { year: '2025 — now', role: 'MCA (AI&DL) IBM COLLABORATION', company: 'Assam Downtown University', text: 'Bridging advanced computing with real-world innovation through an industry-integrated journey across AI, software engineering, and emerging technologies.' },
+
+{ year: '2026', role: 'Smart India Hackathon (SIH)', company: 'AICTE • MIC – Student Innovation', text: 'Participated in Smart India Hackathon 2026 under the Disaster Management theme, working on a software-based solution for problem statement 26206 and gaining hands-on experience in innovation, team collaboration, problem-solving, and rapid solution development.' },
+
   { year: '2023 — 2024', role: 'AI&ML Intern', company: 'Kareng Technologies', text: 'Gained hands-on experience developing machine learning and AI solutions using Python, with practical exposure to data analysis, model training, and AI application development.' },
   { year: '2024 — now', role: 'Independent Projects and Research', company: 'AI • Software • Applied Research', text: 'Building and experimenting with practical systems across weather intelligence, NLP-based spam detection, smart productivity, and agricultural intelligence.' },
 ];
@@ -335,10 +338,12 @@ function About() {
 
 function ProjectArt({ kind }: { kind: string }) {
   return (
-    <div className={`project-art art-${kind}`} aria-hidden="true">
-      {kind === 'lumen' && <><div className="absolute inset-x-8 top-12 h-px bg-[#56e5f2]/40" /><div className="absolute inset-x-8 top-28 h-px bg-[#56e5f2]/20" /><div className="absolute left-[20%] top-9 h-24 w-px bg-[#e7b85b]/60" /><div className="absolute left-[51%] top-5 h-36 w-px bg-[#56e5f2]/70" /><div className="absolute left-[78%] top-20 h-24 w-px bg-[#9774ff]/60" /><div className="absolute left-[49%] top-[48%] h-3 w-3 rounded-full bg-[#56e5f2] shadow-[0_0_24px_#56e5f2]" /><span className="absolute bottom-8 left-8 font-mono text-[9px] tracking-[.2em] text-[#8eeaf0]">STREAM / 084.12 / NOMINAL</span></>}
-      {kind === 'atlas' && <><div className="absolute inset-[12%] rotate-[-12deg] border border-[#e7b85b]/50" /><div className="absolute inset-[21%] rotate-[20deg] border border-[#56e5f2]/30" /><div className="absolute left-[28%] top-[32%] h-24 w-24 rounded-full bg-[#9774ff]/20 blur-2xl" /><div className="absolute right-[20%] top-[24%] h-2 w-2 rounded-full bg-[#e7b85b] shadow-[0_0_17px_#e7b85b]" /><span className="absolute bottom-8 left-8 font-mono text-[9px] tracking-[.2em] text-[#e7b85b]">LAT / 41.88° N / LONG / 87.63° W</span></>}
-      {kind === 'relay' && <><div className="absolute left-[10%] top-[28%] h-16 w-[58%] border border-[#56e5f2]/45 bg-[#56e5f2]/[.06]" /><div className="absolute left-[23%] top-[39%] h-px w-[31%] bg-[#56e5f2]" /><div className="absolute left-[23%] top-[51%] h-px w-[22%] bg-[#e7b85b]/70" /><div className="absolute right-[13%] top-[28%] h-16 w-16 rounded-full border border-[#e7b85b]/60" /><div className="absolute right-[19%] top-[41%] h-3 w-3 rounded-full bg-[#e7b85b] shadow-[0_0_20px_#e7b85b]" /><span className="absolute bottom-8 left-8 font-mono text-[9px] tracking-[.2em] text-[#56e5f2]">GROUNDING / 97.4%</span></>}
+    <div className="project-art" aria-hidden="true">
+      <img
+        src={kind}
+        alt=""
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -469,7 +474,7 @@ function SkillsExperience() {
 function Testimonial() {
   return (
     <section className="mx-auto w-full max-w-[1180px] px-5 py-24 sm:px-8 sm:py-32">
-      <Reveal><div className="quote-card mx-auto max-w-[850px] p-8 sm:p-14"><div className="relative z-[1] max-w-[690px]"><div className="eyebrow">Signal received</div><blockquote className="mt-6 font-display text-[clamp(1.6rem,3vw,2.55rem)] leading-[1.16] tracking-[-.055em] text-foreground">“Mara has the unusual ability to hold the research question and the production pager in the same frame. She makes hard systems feel legible — and then makes them work.”</blockquote><div className="mt-8 flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-full border border-[var(--gold)] bg-[#302941] font-mono text-[10px] text-[var(--gold)]">JC</span><div><div className="font-display text-[13px] text-foreground">Jonah Chen</div><div className="font-mono text-[10px] muted-text">VP Engineering, Northstar Systems</div></div></div></div></div></Reveal>
+      <Reveal><div className="quote-card mx-auto max-w-[850px] p-8 sm:p-14"><div className="relative z-[1] max-w-[690px]"><div className="eyebrow">Signal received</div><blockquote className="mt-6 font-display text-[clamp(1.6rem,3vw,2.55rem)] leading-[1.16] tracking-[-.055em] text-foreground">“Rishav has this strange ability to look at a messy problem and see the architecture hiding underneath it. Give him a question, and sooner or later it comes back as a system you can actually use.”</blockquote><div className="mt-8 flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-full border border-[var(--gold)] bg-[#302941] font-mono text-[10px] text-[var(--gold)]">BD</span><div><div className="font-display text-[13px] text-foreground">Bhumika Deka</div><div className="font-mono text-[10px] muted-text">Business Analyst, Assam Downtown University </div></div></div></div></div></Reveal>
     </section>
   );
 }
@@ -479,15 +484,58 @@ function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const update = (key: keyof typeof form, value: string) => { setForm((current) => ({ ...current, [key]: value })); setErrors((current) => ({ ...current, [key]: '' })); };
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const next: Record<string, string> = {};
-    if (form.name.trim().length < 2) next.name = 'Add your name so I know who is reaching out.';
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = 'Use a valid email address.';
-    if (form.message.trim().length < 20) next.message = 'A little more context helps — 20 characters minimum.';
-    setErrors(next);
-    if (Object.keys(next).length === 0) { setSubmitted(true); }
-  };
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+
+  const next: Record<string, string> = {};
+
+  if (form.name.trim().length < 2) {
+    next.name = 'Add your name so I know who is reaching out.';
+  }
+
+  if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+    next.email = 'Use a valid email address.';
+  }
+
+  if (form.message.trim().length < 20) {
+    next.message = 'A little more context helps — 20 characters minimum.';
+  }
+
+  setErrors(next);
+
+  if (Object.keys(next).length > 0) {
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Failed to send message');
+    }
+
+    setSubmitted(true);
+    setForm({
+      name: '',
+      email: '',
+      message: '',
+    });
+  } catch (error) {
+    console.error('Contact form error:', error);
+
+    setErrors({
+      message: 'Unable to send your message right now. Please try again.',
+    });
+  }
+};
   return (
     <section id="contact" className="scroll-mt-24 border-t border-[var(--line)] py-24 sm:py-32" aria-labelledby="contact-heading">
       <div className="mx-auto grid w-full max-w-[1180px] gap-14 px-5 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-24">
@@ -501,7 +549,7 @@ function Contact() {
 function Footer() {
   return (
     <footer className="border-t border-[var(--line)] py-7">
-      <div className="mx-auto flex w-full max-w-[1180px] flex-col items-start justify-between gap-5 px-5 sm:px-8 md:flex-row md:items-center"><div className="flex items-center gap-3"><span className="brand-orbit" aria-hidden="true"><i /></span><span className="font-mono text-[10px] muted-text">© 2026 Ratul CR / All signals reserved.</span></div><div className="flex items-center gap-5"><a href="https://github.com/ratulcr143-cloud" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="GitHub" data-testid="link-footer-github"><Github size={15} /></a><a href="https://www.linkedin.com/in/ratul-cr-2605b1227/?skipRedirect=true" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="LinkedIn" data-testid="link-footer-linkedin"><Linkedin size={15} /></a><a href="#top" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.14em] text-[var(--gold)] no-underline" data-testid="link-back-to-top">Back to top <ArrowUpRight size={13} /></a></div></div>
+      <div className="mx-auto flex w-full max-w-[1180px] flex-col items-start justify-between gap-5 px-5 sm:px-8 md:flex-row md:items-center"><div className="flex items-center gap-3"><span className="brand-orbit" aria-hidden="true"><i /></span><span className="font-mono text-[10px] muted-text">© 2026 RatulCR / All signals reserved.</span></div><div className="flex items-center gap-5"><a href="https://github.com/ratulcr143-cloud" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="GitHub" data-testid="link-footer-github"><Github size={15} /></a><a href="https://www.linkedin.com/in/ratul-cr-2605b1227/?skipRedirect=true" target="_blank" rel="noreferrer" className="muted-text transition hover:text-[var(--cyan)]" aria-label="LinkedIn" data-testid="link-footer-linkedin"><Linkedin size={15} /></a><a href="#top" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[.14em] text-[var(--gold)] no-underline" data-testid="link-back-to-top">Back to top <ArrowUpRight size={13} /></a></div></div>
     </footer>
   );
 }
