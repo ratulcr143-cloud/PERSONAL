@@ -508,7 +508,7 @@ function Contact() {
   }
 
   try {
-    const response = await fetch('/api/contact', {
+    const response = await fetch('https://portfolio-api-18vm.onrender.com/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
