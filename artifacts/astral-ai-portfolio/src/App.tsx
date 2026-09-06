@@ -298,7 +298,7 @@ function Hero() {
 </div>
 </Reveal>
           <Reveal delay={.08}>
-            <h1 id="hero-heading" className="display-title mt-7 max-w-[720px] text-[clamp(3.7rem,9vw,7.9rem)]">I build intelligence that stays <span className="inline-block w-[12ch] whitespace-nowrap gold-text">
+            <h1 id="hero-heading" className="display-title mt-7 max-w-[720px] text-[clamp(3.7rem,9vw,7.9rem)]">I build intelligence that stays <span className="whitespace-nowrap gold-text">
   {reduced ? 'useful.' : typed}
   <span className="ml-1 inline-block h-[.72em] w-[2px] translate-y-[-.04em] bg-[var(--gold)]" aria-hidden="true" />
 </span>

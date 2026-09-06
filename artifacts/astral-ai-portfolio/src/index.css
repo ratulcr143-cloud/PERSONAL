@@ -469,3 +469,21 @@ html.light .input-field { background: rgba(255,255,255,.68); }
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 640px) {
+  .role-terminal {
+    display: block;
+    line-height: 1.7;
+    white-space: normal;
+  }
+
+  .role-terminal-label {
+    display: inline;
+  }
+
+  .role-terminal-caret {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+}
