@@ -292,9 +292,13 @@ function Hero() {
       <div className="mx-auto grid w-full max-w-[1180px] items-center gap-12 px-5 pb-28 sm:px-8 lg:grid-cols-[1.02fr_.98fr] lg:gap-6 lg:pb-36">
         <div className="relative z-[1]">
           <Reveal><div className="eyebrow">Developer / Researcher / Innovator</div></Reveal>
-          <Reveal delay={.04}><div className="role-terminal mt-5" aria-label={roleText}><span className="role-terminal-label">ROLE /</span><span>{typedRole}</span><span className="role-terminal-caret" aria-hidden="true" /></div></Reveal>
+          <Reveal delay={.04}><div className="role-terminal mt-5" aria-label={roleText}>
+  <span className="role-terminal-label">ROLE /</span>
+  <span>{typedRole}</span><span className="role-terminal-caret" aria-hidden="true" />
+</div>
+</Reveal>
           <Reveal delay={.08}>
-            <h1 id="hero-heading" className="display-title mt-7 max-w-[720px] text-[clamp(3.7rem,9vw,7.9rem)]">I build intelligence that stays <span className="whitespace-nowrap gold-text">
+            <h1 id="hero-heading" className="display-title mt-7 max-w-[720px] text-[clamp(3.7rem,9vw,7.9rem)]">I build intelligence that stays <span className="inline-block w-[12ch] whitespace-nowrap gold-text">
   {reduced ? 'useful.' : typed}
   <span className="ml-1 inline-block h-[.72em] w-[2px] translate-y-[-.04em] bg-[var(--gold)]" aria-hidden="true" />
 </span>
